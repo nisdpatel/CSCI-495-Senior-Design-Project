@@ -5,9 +5,14 @@
 
 import RPi.GPIO as GPIO
 import time
+from time import sleep, strftime
+from picamera import PiCamera
 import smtplib
 import _thread
 import cred
+
+
+camera = PiCamera()
 
 try:
     need_clean = False
@@ -16,6 +21,7 @@ try:
     #Leading '\n' is required for sending an email with ':' (SMS/MMS Gateway)
     MSG  = '\nDoor was '
     DOOR_MSG = {True:'opened', False:'closed'}
+
 
     #Setting up connection to SMTP Server for sending email/sms.
     print('Setting up SMS...')
@@ -56,6 +62,10 @@ try:
         if GPIO.input(PIN) == next_state:
             #Send message on different thread
             _thread.start_new_thread(send_msg, (next_state,))
+            #Update filename
+            filename = '/home/pi/Desktop/cam_%s.jpg' % time.strftime("%I:%M:%S %p")
+            #Take Picture
+            camera.capture(filename)
             #Negate next_state
             next_state = not next_state
         time.sleep(0.3)
