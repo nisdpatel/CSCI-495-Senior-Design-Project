@@ -12,7 +12,7 @@ fromEmail = 'fromEmail@gmail.com'
 fromEmailPassword = 'fromEmailPassword'
 
 # Email you want to send the update to
-toEmail = 'toemail'
+toEmail = 'toemail@gmail.com'
 def sendEmail(image):
 	msgRoot = MIMEMultipart('related')
 	msgRoot['Subject'] = 'Security Update'
