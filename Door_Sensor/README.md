@@ -1,5 +1,12 @@
-# Raspberry Pi Texting Door Notifier
+#cred.py
+Should be changed to match whatever email & phone are being used
 
-Featured in my YouTube tutorial "$50 RASPBERRY PI HOME SECURITY | How to Build a Texting Door Notifier with a Raspberry Pi"
+#List of SMTP POP3 servers
 
-Link: https://youtu.be/fCUJgj_pb4E
+
+https://www.arclab.com/en/kb/email/list-of-smtp-and-pop3-servers-mailserver-list.html
+
+#Wiki SMS gateway
+Use this to replace after the @ in the 'TO' place.
+
+https://en.wikipedia.org/wiki/SMS_gateway
