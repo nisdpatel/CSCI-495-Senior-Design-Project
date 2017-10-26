@@ -17,12 +17,13 @@ class VideoCamera(object):
         if self.flip:
             return np.flip(frame, 0)
         return frame
-
+     # Connets to a video, and gets a frame
     def get_frame(self):
         frame = self.flip_if_needed(self.vs.read())
         ret, jpeg = cv2.imencode('.jpg', frame)
         return jpeg.tobytes()
-
+    
+    # uses image classifier to find the object   
     def get_object(self, classifier):
         found_objects = False
         frame = self.flip_if_needed(self.vs.read()).copy() 
