@@ -10,7 +10,7 @@ from picamera import PiCamera
 import smtplib
 import _thread
 import cred
-
+import os
 
 camera = PiCamera()
 
@@ -62,10 +62,14 @@ try:
         if GPIO.input(PIN) == next_state:
             #Send message on different thread
             _thread.start_new_thread(send_msg, (next_state,))
-            #Update filename
-            filename = '/home/pi/Desktop/cam_%s.jpg' % time.strftime("%I:%M:%S %p")
-            #Take Picture
+            #Update filename one for emailing a picture one to be saved with timestamp
+            filename = '/home/pi/Desktop/door/cam_%s.jpg' % time.strftime("%I:%M:%S %p")
+            filename1 = '/home/pi/Desktop/door/email.jpg'
+            #Take Both Pictures
             camera.capture(filename)
+            camera.capture(filename1)
+            #Calling Another Script To Send Email of Picture
+            os.system("python /home/pi/Desktop/door/sendnotify.py")
             #Negate next_state
             next_state = not next_state
         time.sleep(0.3)
